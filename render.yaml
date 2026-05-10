@@ -5,9 +5,9 @@ services:
     repo: https://github.com/aymanalmousa1991-afk/Stuc-Renovatie.git
     region: frankfurt
     plan: free
-    branch: main
+    branch: master
     rootDir: app
-    buildCommand: npm run build
+    buildCommand: npm install && npm run build
     startCommand: npm start
     healthCheckPath: /api/trpc/ping
     envVars:

@@ -6,6 +6,7 @@ import { appRouter } from "./router";
 import { createContext } from "./context";
 import { env } from "./lib/env";
 import { initDatabase } from "./lib/init";
+import { serveStaticFiles } from "./lib/vite";
 
 const app = new Hono<{ Bindings: HttpBindings }>();
 
@@ -31,6 +32,11 @@ app.use("/api/trpc/*", async (c) => {
   }
 });
 app.all("/api/*", (c) => c.json({ error: "Not Found" }, 404));
+
+// Serve static frontend files in production
+if (env.isProduction) {
+  serveStaticFiles(app);
+}
 
 // Initialize database + seed on first run (async now)
 initDatabase().catch((err) => {

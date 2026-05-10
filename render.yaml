@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: stuc-renovatie
+    runtime: node
+    repo: https://github.com/aymanalmousa1991-afk/Stuc-Renovatie.git
+    region: frankfurt
+    plan: free
+    branch: main
+    rootDir: app
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/trpc/ping
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: APP_SECRET
+        sync: false
+      - key: PORT
+        value: 3000

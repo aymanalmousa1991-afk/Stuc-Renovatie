@@ -20,8 +20,8 @@ const registerSchema = z.object({
 
 export const authRouter = createRouter({
   me: authedQuery.query((opts) => {
-    const { password, ...safeUser } = opts.ctx.user;
-    return safeUser;
+    // User is already serialized via toJSON in Mongoose model
+    return opts.ctx.user;
   }),
 
   login: publicQuery
@@ -38,7 +38,7 @@ export const authRouter = createRouter({
       }
 
       const token = await signSessionToken({
-        userId: user._id.toString(),
+        userId: user.id,
         email: user.email,
         role: user.role,
       });
@@ -55,8 +55,7 @@ export const authRouter = createRouter({
         }),
       );
 
-      const { password: _, ...safeUser } = user;
-      return safeUser;
+      return user;
     }),
 
   register: publicQuery
@@ -76,8 +75,7 @@ export const authRouter = createRouter({
         role: input.email === "admin@admin.com" ? "admin" : "user",
       });
 
-      const { password: _, ...safeUser } = user;
-      return safeUser;
+      return user;
     }),
 
   logout: authedQuery.mutation(async ({ ctx }) => {
@@ -87,7 +85,7 @@ export const authRouter = createRouter({
       cookie.serialize(Session.cookieName, "", {
         httpOnly: opts.httpOnly,
         path: opts.path,
-        sameSide: (opts.sameSite?.toLowerCase() || "lax") as "lax" | "none",
+        sameSite: (opts.sameSite?.toLowerCase() || "lax") as "lax" | "none",
         secure: opts.secure,
         maxAge: 0,
       }),

@@ -1,11 +1,14 @@
 import { User } from "../models/User";
 import type { IUser } from "../models/User";
-export async function findUserByEmail(email: string): Promise<IUser | null> {
-  return User.findOne({ email }).lean() as Promise<IUser | null>;
+
+export async function findUserByEmail(email: string): Promise<any> {
+  const user = await User.findOne({ email });
+  return user ? user.toJSON() : null;
 }
 
-export async function findUserById(id: string): Promise<IUser | null> {
-  return User.findById(id).lean() as Promise<IUser | null>;
+export async function findUserById(id: string): Promise<any> {
+  const user = await User.findById(id);
+  return user ? user.toJSON() : null;
 }
 
 export async function createUser(data: {
@@ -13,12 +16,12 @@ export async function createUser(data: {
   name?: string;
   password: string;
   role?: "user" | "admin";
-}): Promise<IUser> {
+}): Promise<any> {
   const user = await User.create(data);
-  return user.toObject();
+  return user.toJSON();
 }
 
-export async function findAllUsers(): Promise<IUser[]> {
-  return User.find().sort({ createdAt: -1 }).lean() as Promise<IUser[]>;
+export async function findAllUsers(): Promise<any[]> {
+  const users = await User.find().sort({ createdAt: -1 });
+  return users.map(u => u.toJSON());
 }
-

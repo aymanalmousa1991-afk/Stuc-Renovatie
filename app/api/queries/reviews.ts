@@ -1,11 +1,13 @@
 import { Review } from "../models/Review";
-import type { IReview } from "../models/Review";
-export async function findReviews(): Promise<IReview[]> {
-  return Review.find().sort({ createdAt: -1 }).lean() as Promise<IReview[]>;
+
+export async function findReviews(): Promise<any[]> {
+  const reviews = await Review.find().sort({ createdAt: -1 });
+  return reviews.map(r => r.toJSON());
 }
 
-export async function findReviewById(id: string): Promise<IReview | null> {
-  return Review.findById(id).lean() as Promise<IReview | null>;
+export async function findReviewById(id: string): Promise<any> {
+  const review = await Review.findById(id);
+  return review ? review.toJSON() : null;
 }
 
 export async function createReview(data: {
@@ -14,10 +16,11 @@ export async function createReview(data: {
   quote: string;
   rating?: number;
   status?: "active" | "draft" | "archived";
-}): Promise<IReview> {
+}): Promise<any> {
   const review = await Review.create(data);
-  return review.toObject();
+  return review.toJSON();
 }
+
 export async function updateReview(
   id: string,
   data: {
@@ -27,11 +30,12 @@ export async function updateReview(
     rating?: number;
     status?: "active" | "draft" | "archived";
   }
-): Promise<IReview | null> {
-  return Review.findByIdAndUpdate(id, { $set: data }, { new: true }).lean() as Promise<IReview | null>;
+): Promise<any> {
+  const review = await Review.findByIdAndUpdate(id, { $set: data }, { new: true });
+  return review ? review.toJSON() : null;
 }
 
-export async function deleteReview(id: string): Promise<IReview | null> {
-  return Review.findByIdAndDelete(id).lean() as Promise<IReview | null>;
+export async function deleteReview(id: string): Promise<any> {
+  const review = await Review.findByIdAndDelete(id);
+  return review ? review.toJSON() : null;
 }
-

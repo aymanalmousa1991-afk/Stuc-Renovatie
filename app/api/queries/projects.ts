@@ -1,11 +1,13 @@
 import { Project } from "../models/Project";
-import type { IProject } from "../models/Project";
-export async function findProjects(): Promise<IProject[]> {
-  return Project.find().sort({ createdAt: -1 }).lean() as Promise<IProject[]>;
+
+export async function findProjects(): Promise<any[]> {
+  const projects = await Project.find().sort({ createdAt: -1 });
+  return projects.map(p => p.toJSON());
 }
 
-export async function findProjectById(id: string): Promise<IProject | null> {
-  return Project.findById(id).lean() as Promise<IProject | null>;
+export async function findProjectById(id: string): Promise<any> {
+  const project = await Project.findById(id);
+  return project ? project.toJSON() : null;
 }
 
 export async function createProject(data: {
@@ -15,10 +17,11 @@ export async function createProject(data: {
   image?: string;
   amenities?: string;
   status?: "active" | "draft" | "archived";
-}): Promise<IProject> {
+}): Promise<any> {
   const project = await Project.create(data);
-  return project.toObject();
+  return project.toJSON();
 }
+
 export async function updateProject(
   id: string,
   data: {
@@ -29,11 +32,12 @@ export async function updateProject(
     amenities?: string;
     status?: "active" | "draft" | "archived";
   }
-): Promise<IProject | null> {
-  return Project.findByIdAndUpdate(id, { $set: data }, { new: true }).lean() as Promise<IProject | null>;
+): Promise<any> {
+  const project = await Project.findByIdAndUpdate(id, { $set: data }, { new: true });
+  return project ? project.toJSON() : null;
 }
 
-export async function deleteProject(id: string): Promise<IProject | null> {
-  return Project.findByIdAndDelete(id).lean() as Promise<IProject | null>;
+export async function deleteProject(id: string): Promise<any> {
+  const project = await Project.findByIdAndDelete(id);
+  return project ? project.toJSON() : null;
 }
-

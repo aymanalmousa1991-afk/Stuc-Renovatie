@@ -22,7 +22,17 @@ const ReviewSchema = new Schema<IReview>(
       default: "active",
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: {
+      transform(_doc, ret) {
+        ret.id = ret._id.toString();
+        delete ret._id;
+        delete ret.__v;
+        return ret;
+      },
+    },
+  }
 );
 
 export const Review = mongoose.model<IReview>("Review", ReviewSchema);

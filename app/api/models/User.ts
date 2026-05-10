@@ -20,7 +20,18 @@ const UserSchema = new Schema<IUser>(
     role: { type: String, enum: ["user", "admin"], default: "user" },
     lastSignInAt: { type: Date, default: Date.now },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: {
+      transform(_doc, ret) {
+        ret.id = ret._id.toString();
+        delete ret._id;
+        delete ret.__v;
+        delete ret.password;
+        return ret;
+      },
+    },
+  }
 );
 
 export const User = mongoose.model<IUser>("User", UserSchema);

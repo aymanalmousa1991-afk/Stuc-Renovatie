@@ -1,4 +1,4 @@
-import { footerConfig } from '../config';
+import { footerConfig, navigationConfig } from '../config';
 
 export default function Footer() {
   const hasFooterContent =
@@ -56,6 +56,20 @@ export default function Footer() {
           textAlign: 'center',
         }}
       >
+        {navigationConfig.logoPath && (
+          <img
+            src={navigationConfig.logoPath}
+            alt={footerConfig.brandName}
+            style={{
+              height: '60px',
+              width: 'auto',
+              maxWidth: '180px',
+              objectFit: 'contain',
+              margin: '0 auto 12px',
+              display: 'block',
+            }}
+          />
+        )}
         {footerConfig.brandName && (
           <p
             style={{

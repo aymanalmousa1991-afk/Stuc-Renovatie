@@ -107,12 +107,14 @@ export default function Navigation() {
               src={navigationConfig.logoPath}
               alt={navigationConfig.brandName}
               style={{
-                height: '36px',
+                height: '52px',
                 width: 'auto',
-                maxWidth: navigationConfig.logoWidth || 180,
+                maxWidth: navigationConfig.logoWidth || 200,
                 objectFit: 'contain',
                 filter: isLightSection ? 'none' : 'brightness(0) invert(1)',
-                transition: 'filter 0.6s ease',
+                backgroundColor: isLightSection ? 'transparent' : 'rgba(242, 235, 224, 0.15)',
+                borderRadius: '4px',
+                padding: '4px 8px',
               }}
             />
           ) : (

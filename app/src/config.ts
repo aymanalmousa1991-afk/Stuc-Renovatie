@@ -122,7 +122,7 @@ export const siteConfig: SiteConfig = {
 export const navigationConfig: NavigationConfig = {
   brandName: "Stuc & Renovatiebedrijf",
   logoPath: "images/logo.png",
-  logoWidth: 160,
+  logoWidth: 200,
   links: [
     { label: "Diensten", target: "#anatomy" },
     { label: "Projecten", target: "#tiers" },

@@ -107,14 +107,14 @@ export default function Navigation() {
               src={navigationConfig.logoPath}
               alt={navigationConfig.brandName}
               style={{
-                height: '52px',
+                                height: '72px',
                 width: 'auto',
-                maxWidth: navigationConfig.logoWidth || 200,
+                maxWidth: navigationConfig.logoWidth || 260,
                 objectFit: 'contain',
-                filter: isLightSection ? 'none' : 'brightness(0) invert(1)',
-                backgroundColor: isLightSection ? 'transparent' : 'rgba(242, 235, 224, 0.15)',
-                borderRadius: '4px',
-                padding: '4px 8px',
+                backgroundColor: 'rgba(242, 235, 224, 0.92)',
+                borderRadius: '6px',
+                padding: '8px 16px',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
               }}
             />
           ) : (
@@ -244,3 +244,5 @@ export default function Navigation() {
     </nav>
   );
 }
+
+

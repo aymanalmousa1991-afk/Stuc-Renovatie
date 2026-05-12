@@ -122,7 +122,7 @@ export const siteConfig: SiteConfig = {
 export const navigationConfig: NavigationConfig = {
   brandName: "Stuc & Renovatiebedrijf",
   logoPath: "images/logo.png",
-  logoWidth: 200,
+  logoWidth: 300,
   links: [
     { label: "Diensten", target: "#anatomy" },
     { label: "Projecten", target: "#tiers" },
@@ -340,3 +340,4 @@ export const footerConfig: FooterConfig = {
   ],
   copyright: "© 2024 Stuc & Renovatiebedrijf Nijmegen. Alle rechten voorbehouden.",
 }
+

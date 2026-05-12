@@ -54,8 +54,10 @@ export default function Footer() {
           margin: '0 auto',
           padding: '0 24px 80px',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-          gap: 'clamp(24px, 4vw, 48px)',
+
+
+          gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+          gap: 'clamp(16px, 3vw, 40px)',
         }}
       >
         {/* Brand Column */}
@@ -68,7 +70,6 @@ export default function Footer() {
                 fontWeight: 500,
                 color: '#112130',
                 letterSpacing: '1px',
-                textTransform: 'uppercase',
                 marginBottom: '8px',
                 whiteSpace: 'nowrap',
               }}

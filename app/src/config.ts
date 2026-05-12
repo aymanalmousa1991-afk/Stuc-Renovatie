@@ -112,7 +112,7 @@ export interface ContactConfig {
 // ============================================
 export const siteConfig: SiteConfig = {
   language: "nl",
-  siteTitle: "Stuc- & Renovatiebedrijf Nijmegen | Vakmanschap in Stucwerk & Renovatie",
+  siteTitle: "Stuc & Renovatiebedrijf Nijmegen | Vakmanschap in Stucwerk & Renovatie",
   siteDescription: "Professioneel stuc- en renovatiebedrijf in Nijmegen. Specialist in stukadoorswerk, complete renovaties en afwerking. Vraag een gratis offerte aan.",
 }
 
@@ -121,6 +121,8 @@ export const siteConfig: SiteConfig = {
 // ============================================
 export const navigationConfig: NavigationConfig = {
   brandName: "Stuc & Renovatiebedrijf",
+  logoPath: "images/logo.png",
+  logoWidth: 160,
   links: [
     { label: "Diensten", target: "#anatomy" },
     { label: "Projecten", target: "#tiers" },

@@ -62,7 +62,7 @@ export default function Tiers() {
         backgroundColor: '#FFFFFF',
         position: 'relative',
         zIndex: 2,
-        padding: '100px 0 80px',
+        padding: 'clamp(60px, 10vw, 100px) 0 clamp(40px, 8vw, 80px)',
       }}
     >
       {/* Section Header */}
@@ -111,8 +111,8 @@ export default function Tiers() {
             style={{
               display: 'flex',
               flexDirection: i % 2 === 0 ? 'row' : 'row-reverse',
-              gap: '60px',
-              marginBottom: i < tiers.length - 1 ? '100px' : '0',
+              gap: 'clamp(24px, 5vw, 60px)',
+              marginBottom: i < tiers.length - 1 ? 'clamp(48px, 8vw, 100px)' : '0',
               alignItems: 'center',
               flexWrap: 'wrap',
             }}
@@ -123,7 +123,9 @@ export default function Tiers() {
               style={{
                 width: '100%',
                 maxWidth: '460px',
-                flex: '0 0 auto',
+                minWidth: '280px',
+                flex: '1 1 100%',
+                '@media (min-width: 768px)': { flex: '0 0 auto' },
                 position: 'relative',
                 overflow: 'hidden',
                 borderRadius: '12px',
@@ -300,12 +302,14 @@ export default function Tiers() {
             position: 'fixed',
             inset: 0,
             zIndex: 9999,
-            backgroundColor: 'rgba(0,0,0,0.6)',
+            backgroundColor: 'rgba(0,0,0,0.7)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '24px',
-            backdropFilter: 'blur(4px)',
+            padding: '16px',
+            backdropFilter: 'blur(6px)',
+            WebkitBackdropFilter: 'blur(6px)',
+            overflow: 'auto',
           }}
           onClick={() => setSelectedTier(null)}
         >
@@ -315,10 +319,12 @@ export default function Tiers() {
               maxWidth: '800px',
               width: '100%',
               maxHeight: '90vh',
+              height: 'fit-content',
               overflow: 'auto',
-              borderRadius: '2px',
-              boxShadow: '0 24px 48px rgba(0,0,0,0.2)',
+              borderRadius: '8px',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.3)',
               position: 'relative',
+              margin: 'auto',
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -327,9 +333,9 @@ export default function Tiers() {
               onClick={() => setSelectedTier(null)}
               style={{
                 position: 'absolute',
-                top: '16px',
-                right: '16px',
-                background: 'rgba(255,255,255,0.9)',
+                top: '12px',
+                right: '12px',
+                background: 'rgba(0,0,0,0.5)',
                 border: 'none',
                 borderRadius: '50%',
                 width: '36px',
@@ -338,28 +344,40 @@ export default function Tiers() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                zIndex: 2,
+                zIndex: 10,
+                color: '#FFFFFF',
                 transition: 'all 0.2s ease',
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#112130'; e.currentTarget.style.color = '#F2EBE0'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.9)'; e.currentTarget.style.color = '#112130'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#112130'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.5)'; }}
             >
               <X size={18} />
             </button>
 
-            {/* Hero Image */}
-            {selectedTier.image && (
-              <img
-                src={selectedTier.image}
-                alt={selectedTier.name}
-                style={{
-                  width: '100%',
-                  height: '300px',
-                  objectFit: 'cover',
-                  display: 'block',
-                }}
-              />
-            )}
+            {/* Hero Image met gradient overlay naar content */}
+            <div style={{ position: 'relative' }}>
+              {selectedTier.image && (
+                <img
+                  src={selectedTier.image}
+                  alt={selectedTier.name}
+                  style={{
+                    width: '100%',
+                    height: 'clamp(180px, 30vw, 300px)',
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                />
+              )}
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: '80px',
+                background: 'linear-gradient(to bottom, transparent, #FFFFFF)',
+                pointerEvents: 'none',
+              }} />
+            </div>
 
             {/* Content */}
             <div style={{ padding: '40px' }}>

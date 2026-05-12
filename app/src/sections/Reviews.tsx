@@ -137,7 +137,7 @@ export default function Reviews() {
           <h2
             style={{
               fontFamily: '"Cormorant Garamond", Georgia, serif',
-              fontSize: '42px',
+              fontSize: 'clamp(30px, 5vw, 42px)',
               fontWeight: 500,
               lineHeight: 1.2,
               color: '#112130',
@@ -357,12 +357,17 @@ export default function Reviews() {
           <ChevronRight size={20} />
         </button>
 
-        {/* Cards Container */}
+        {/* Cards Container — horizontaal scrollen op mobile */}
         <div
           style={{
             display: 'flex',
             gap: '24px',
-            overflow: 'hidden',
+            overflow: 'auto',
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            paddingBottom: '8px',
           }}
         >
           {allReviews.map((review, i) => (
@@ -371,13 +376,12 @@ export default function Reviews() {
               className="review-card"
               style={{
                 flex: '0 0 calc(33.333% - 16px)',
-                minWidth: '300px',
+                minWidth: '280px',
                 backgroundColor: '#FFFFFF',
-                padding: '40px',
+                padding: 'clamp(24px, 3vw, 40px)',
                 borderRadius: '2px',
                 boxShadow: '0 4px 24px rgba(17, 33, 48, 0.06)',
-                transform: `translateX(calc(-${activeIndex * 100}% - ${activeIndex * 24}px))`,
-                transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                scrollSnapAlign: 'start',
                 opacity: i >= activeIndex && i < activeIndex + 3 ? 1 : 0.5,
               }}
             >

@@ -91,25 +91,11 @@ export default function Anatomy() {
 
       {/* Split Layout */}
       <div
-        style={{
-          display: 'flex',
-          maxWidth: '1400px',
-          margin: '0 auto',
-          minHeight: '100vh',
-        }}
+        className="anatomy-split"
       >
-        {/* Left: Sticky HeritageHelix */}
+        {/* Left: Sticky HeritageHelix — hidden on mobile via CSS */}
         <div
-          style={{
-            width: '50%',
-            position: 'sticky',
-            top: 0,
-            height: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          className="hidden md:flex"
+          className="anatomy-helix-col"
         >
           <div style={{ width: '100%', height: '80vh' }}>
             <HeritageHelix />
@@ -118,11 +104,7 @@ export default function Anatomy() {
 
         {/* Right: Scrolling Content */}
         <div
-          style={{
-            width: '50%',
-            padding: '0 48px',
-          }}
-          className="w-full md:w-1/2"
+          className="anatomy-content-col"
         >
           {pillars.map((pillar, i) => (
             <div

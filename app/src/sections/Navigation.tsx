@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { getLenis } from '../hooks/useLenis';
 import { navigationConfig } from '../config';
+import { Menu, X } from 'lucide-react';
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [isLightSection, setIsLightSection] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -12,16 +14,16 @@ export default function Navigation() {
       setScrolled(window.scrollY > 80);
 
       const navHeight = navRef.current?.offsetHeight ?? 0;
-      const probeY = navHeight > 0 ? navHeight * 0.6 : 60;
-      const lightSectionIds = ['anatomy', 'tiers', 'reviews', 'quote', 'contact', 'footer'];
-      const isInLightSection = lightSectionIds.some((id) => {
+      const probeY = navHeight > 0 ? navHeight * 0.8 : 60;
+      // Detect light background sections by checking computed background color
+      const darkSections = ['hero', 'manifesto', 'quote'];
+      const isInDarkSection = darkSections.some((id) => {
         const el = document.getElementById(id);
         if (!el) return false;
         const rect = el.getBoundingClientRect();
         return rect.top <= probeY && rect.bottom >= probeY;
       });
-
-      setIsLightSection(isInLightSection);
+      setIsLightSection(!isInDarkSection);
     };
 
     handleScroll();
@@ -34,11 +36,22 @@ export default function Navigation() {
     };
   }, []);
 
+  // Close mobile menu on route/scroll
+  useEffect(() => {
+    const closeMobile = () => setMobileOpen(false);
+    window.addEventListener('scroll', closeMobile, { once: true });
+    return () => window.removeEventListener('scroll', closeMobile);
+  }, []);
+
   const baseTextColor = isLightSection ? '#112130' : '#F2EBE0';
   const hoverTextColor = isLightSection ? '#A89080' : '#D4A574';
+  const bgColor = isLightSection
+    ? 'rgba(242, 235, 224, 0.88)'
+    : 'rgba(17, 33, 48, 0.75)';
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
+    setMobileOpen(false);
     const lenis = getLenis();
     if (lenis) {
       lenis.scrollTo(targetId);
@@ -61,7 +74,7 @@ export default function Navigation() {
         left: 0,
         width: '100%',
         zIndex: 100,
-        padding: scrolled ? '16px 0' : '24px 0',
+        padding: scrolled ? '12px 0' : '20px 0',
         transition: 'padding 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
@@ -70,35 +83,64 @@ export default function Navigation() {
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '14px 40px',
+          padding: '12px 24px',
           borderRadius: '2px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
       >
-        {navigationConfig.brandName ? (
-          <a
-            href="#hero"
-            onClick={(e) => handleNavClick(e, '#hero')}
-            style={{
-              fontFamily: '"Cormorant Garamond", Georgia, serif',
-              fontSize: '20px',
-              fontWeight: 500,
-              color: baseTextColor,
-              letterSpacing: '2px',
-              textDecoration: 'none',
-              textTransform: 'uppercase',
-              transition: 'color 0.6s ease',
-            }}
-          >
-            {navigationConfig.brandName}
-          </a>
-        ) : (
-          <div />
-        )}
+        {/* Logo / Brand */}
+        <a
+          href="#hero"
+          onClick={(e) => handleNavClick(e, '#hero')}
+          style={{
+            textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            zIndex: 101,
+          }}
+        >
+          {navigationConfig.logoPath ? (
+            <img
+              src={navigationConfig.logoPath}
+              alt={navigationConfig.brandName}
+              style={{
+                height: '36px',
+                width: 'auto',
+                maxWidth: navigationConfig.logoWidth || 180,
+                objectFit: 'contain',
+                filter: isLightSection ? 'none' : 'brightness(0) invert(1)',
+                transition: 'filter 0.6s ease',
+              }}
+            />
+          ) : (
+            <span
+              style={{
+                fontFamily: '"Cormorant Garamond", Georgia, serif',
+                fontSize: 'clamp(16px, 2.5vw, 20px)',
+                fontWeight: 500,
+                color: baseTextColor,
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                transition: 'color 0.6s ease',
+              }}
+            >
+              {navigationConfig.brandName}
+            </span>
+          )}
+        </a>
 
-        <div style={{ display: 'flex', gap: '36px', alignItems: 'center' }}>
+        {/* Desktop links */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '28px',
+            alignItems: 'center',
+          }}
+          className="desktop-nav"
+        >
           {navigationConfig.links.map((item) => (
             <a
               key={`${item.label}-${item.target}`}
@@ -115,6 +157,7 @@ export default function Navigation() {
                 textTransform: 'uppercase',
                 transition: 'color 0.6s ease',
                 opacity: 0.85,
+                display: 'inline-block',
               }}
               onMouseEnter={(e) => {
                 (e.target as HTMLAnchorElement).style.color = hoverTextColor;
@@ -129,7 +172,73 @@ export default function Navigation() {
             </a>
           ))}
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          style={{
+            display: 'none',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            color: baseTextColor,
+            padding: '4px',
+            zIndex: 101,
+          }}
+          className="mobile-hamburger"
+          aria-label="Menu"
+        >
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile menu overlay */}
+      {mobileOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: isLightSection ? 'rgba(242, 235, 224, 0.97)' : 'rgba(17, 33, 48, 0.97)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '32px',
+            zIndex: 99,
+          }}
+        >
+          {navigationConfig.links.map((item) => (
+            <a
+              key={`mobile-${item.label}-${item.target}`}
+              href={item.target}
+              onClick={(e) => handleNavClick(e, item.target)}
+              style={{
+                fontFamily: '"Cormorant Garamond", Georgia, serif',
+                fontSize: '28px',
+                fontWeight: 400,
+                color: baseTextColor,
+                letterSpacing: '2px',
+                textDecoration: 'none',
+                textTransform: 'uppercase',
+                transition: 'color 0.3s ease',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = hoverTextColor; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = baseTextColor; }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {/* CSS for mobile responsive */}
+      <style>{`
+        @media (max-width: 768px) {
+          .desktop-nav { display: none !important; }
+          .mobile-hamburger { display: flex !important; }
+          nav > div { padding: 10px 16px !important; }
+        }
+      `}</style>
     </nav>
   );
 }

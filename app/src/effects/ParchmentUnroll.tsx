@@ -83,6 +83,9 @@ export default function ParchmentUnroll() {
   const observersRef = useRef<IntersectionObserver[]>([]);
 
   useEffect(() => {
+    // Skip on mobile devices (touchscreen)
+    const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+    if (isMobile) return;
     const container = canvasContainerRef.current;
     if (!container) return;
 

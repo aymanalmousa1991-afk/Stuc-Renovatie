@@ -85,7 +85,7 @@ export default function QuoteForm() {
         backgroundColor: '#112130',
         position: 'relative',
         zIndex: 2,
-        padding: '100px 0',
+        padding: 'clamp(60px, 10vw, 100px) 0',
       }}
     >
       <Toaster position="top-right" />
@@ -101,7 +101,7 @@ export default function QuoteForm() {
         }}
       >
         {/* Left Column */}
-        <div style={{ flex: '1 1 400px', minWidth: '300px' }}>
+        <div style={{ flex: '1 1 400px', minWidth: 'clamp(280px, 90vw, 400px)' }}>
           {quoteConfig.sectionLabel && (
             <p
               style={{
@@ -121,7 +121,7 @@ export default function QuoteForm() {
             <h2
               style={{
                 fontFamily: '"Cormorant Garamond", Georgia, serif',
-                fontSize: '42px',
+                fontSize: 'clamp(30px, 5vw, 42px)',
                 fontWeight: 500,
                 lineHeight: 1.2,
                 color: '#F2EBE0',

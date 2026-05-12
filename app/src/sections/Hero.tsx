@@ -106,7 +106,7 @@ export default function Hero() {
           zIndex: 10,
           maxWidth: '600px',
           width: '90%',
-          padding: '48px 40px 40px',
+          padding: '48px clamp(20px, 5vw, 40px) clamp(32px, 5vw, 40px)',
           borderRadius: '2px',
           textAlign: 'center',
         }}

@@ -9,6 +9,7 @@ export default function WhatsAppButton() {
       href={`https://wa.me/${phoneNumber}?text=${message}`}
       target="_blank"
       rel="noopener noreferrer"
+      className="whatsapp-btn"
       style={{
         position: 'fixed',
         bottom: '24px',

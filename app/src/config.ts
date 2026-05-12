@@ -11,6 +11,8 @@ export interface NavigationLink {
 
 export interface NavigationConfig {
   brandName: string
+  logoPath?: string
+  logoWidth?: number
   links: NavigationLink[]
 }
 

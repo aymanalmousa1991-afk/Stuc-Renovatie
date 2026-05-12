@@ -119,10 +119,10 @@ export default function Navigation() {
             <span
               style={{
                 fontFamily: '"Cormorant Garamond", Georgia, serif',
-                fontSize: 'clamp(16px, 2.5vw, 20px)',
-                fontWeight: 500,
+                fontSize: 'clamp(18px, 3vw, 24px)',
+                fontWeight: 600,
                 color: baseTextColor,
-                letterSpacing: '2px',
+                letterSpacing: '3px',
                 textTransform: 'uppercase',
                 transition: 'color 0.6s ease',
               }}

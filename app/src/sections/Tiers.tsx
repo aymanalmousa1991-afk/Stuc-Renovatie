@@ -254,42 +254,6 @@ export default function Tiers() {
                   </li>
                 ))}
               </ul>
-
-              {/* CTA Button — opent modal met details */}
-              {tier.ctaText && (
-                <button
-                  onClick={() => setSelectedTier(tier)}
-                  style={{
-                    fontFamily: 'Inter, system-ui, sans-serif',
-                    fontSize: '11px',
-                    fontWeight: 600,
-                    color: '#112130',
-                    letterSpacing: '2px',
-                    textTransform: 'uppercase',
-                    textDecoration: 'none',
-                    padding: '14px 36px',
-                    border: '1px solid rgba(17, 33, 48, 0.25)',
-                    borderRadius: '2px',
-                    transition: 'all 0.6s ease',
-                    background: 'transparent',
-                    cursor: 'pointer',
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget;
-                    el.style.backgroundColor = '#112130';
-                    el.style.color = '#F2EBE0';
-                    el.style.borderColor = '#112130';
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget;
-                    el.style.backgroundColor = 'transparent';
-                    el.style.color = '#112130';
-                    el.style.borderColor = 'rgba(17, 33, 48, 0.25)';
-                  }}
-                >
-                  {tier.ctaText}
-                </button>
-              )}
             </div>
           </div>
         ))}

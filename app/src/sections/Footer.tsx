@@ -54,8 +54,8 @@ export default function Footer() {
           margin: '0 auto',
           padding: '0 24px 80px',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '48px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+          gap: 'clamp(24px, 4vw, 48px)',
         }}
       >
         {/* Brand Column */}

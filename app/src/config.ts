@@ -120,7 +120,7 @@ export const siteConfig: SiteConfig = {
 // NAVIGATION
 // ============================================
 export const navigationConfig: NavigationConfig = {
-  brandName: "STUC- & RENOVATIEBEDRIJF",
+  brandName: "Stuc & Renovatiebedrijf",
   links: [
     { label: "Diensten", target: "#anatomy" },
     { label: "Projecten", target: "#tiers" },
@@ -135,7 +135,7 @@ export const navigationConfig: NavigationConfig = {
 // ============================================
 export const heroConfig: HeroConfig = {
   videoPath: "videos/hero.mp4",
-  eyebrow: "STUC- & RENOVATIEBEDRIJF",
+  eyebrow: "Stuc & Renovatiebedrijf",
   titleLine: "Professioneel",
   titleEmphasis: "Stucwerk & Renovatie",
   subtitleLine1: "in Nijmegen",
@@ -301,7 +301,8 @@ export const contactConfig: ContactConfig = {
 // ============================================
 export const footerConfig: FooterConfig = {
   ageGateText: "Vakmanschap dat u kunt vertrouwen — al meer dan tien jaar het adres in Nijmegen voor stucwerk en renovatie.",
-  brandName: "STUC- & RENOVATIEBEDRIJF",
+
+  brandName: "Stuc & Renovatiebedrijf",
   brandTaglineLines: ["Vakmanschap sinds 2014", "Nijmegen en omgeving"],
   columns: [
     {
@@ -335,5 +336,5 @@ export const footerConfig: FooterConfig = {
       ],
     },
   ],
-  copyright: "© 2024 Stuc- & Renovatiebedrijf Nijmegen. Alle rechten voorbehouden.",
+  copyright: "© 2024 Stuc & Renovatiebedrijf Nijmegen. Alle rechten voorbehouden.",
 }

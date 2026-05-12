@@ -47,50 +47,57 @@ export default function Footer() {
         )}
       </div>
 
-      {/* Footer Columns */}
+      {/* Brand Section — full width boven de columns */}
+      <div
+        style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 24px 40px',
+          textAlign: 'center',
+        }}
+      >
+        {footerConfig.brandName && (
+          <p
+            style={{
+              fontFamily: '"Cormorant Garamond", Georgia, serif',
+              fontSize: 'clamp(22px, 4vw, 28px)',
+              fontWeight: 600,
+              color: '#112130',
+              letterSpacing: '2px',
+              marginBottom: '8px',
+              overflowWrap: 'break-word',
+              wordWrap: 'break-word',
+            }}
+          >
+            {footerConfig.brandName}
+          </p>
+        )}
+        {footerConfig.brandTaglineLines.length > 0 && (
+          <p
+            style={{
+              fontFamily: 'Inter, system-ui, sans-serif',
+              fontSize: '13px',
+              fontWeight: 400,
+              lineHeight: 1.6,
+              color: '#A89080',
+            }}
+          >
+            {footerConfig.brandTaglineLines.join(' · ')}
+          </p>
+        )}
+      </div>
+
+      {/* Columns — NAVIGATIE, DIENSTEN, CONTACT naast elkaar */}
       <div
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
           padding: '0 24px 80px',
           display: 'grid',
-
-
-          gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
-          gap: 'clamp(16px, 3vw, 40px)',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: 'clamp(12px, 3vw, 48px)',
         }}
       >
-        {/* Brand Column */}
-        <div>
-          {footerConfig.brandName && (
-            <p
-              style={{
-                fontFamily: '"Cormorant Garamond", Georgia, serif',
-                fontSize: '16px',
-                fontWeight: 500,
-                color: '#112130',
-                letterSpacing: '1px',
-                marginBottom: '8px',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {footerConfig.brandName}
-            </p>
-          )}
-          {footerConfig.brandTaglineLines.length > 0 && (
-            <p
-              style={{
-                fontFamily: 'Inter, system-ui, sans-serif',
-                fontSize: '12px',
-                fontWeight: 400,
-                lineHeight: 1.6,
-                color: '#A89080',
-              }}
-            >
-              {footerConfig.brandTaglineLines.join(' · ')}
-            </p>
-          )}
-        </div>
 
         {footerConfig.columns.map((column) => (
           <div key={column.heading}>

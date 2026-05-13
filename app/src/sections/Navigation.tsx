@@ -102,7 +102,7 @@ export default function Navigation() {
             zIndex: 101,
           }}
         >
-          {navigationConfig.logoPath ? (
+          {false ? (
             <img
               src={navigationConfig.logoPath}
               alt={navigationConfig.brandName}
@@ -121,10 +121,10 @@ export default function Navigation() {
             <span
               style={{
                 fontFamily: '"Cormorant Garamond", Georgia, serif',
-                fontSize: 'clamp(18px, 3vw, 24px)',
-                fontWeight: 600,
+                fontSize: 'clamp(20px, 3.5vw, 28px)',
+                fontWeight: 700,
                 color: baseTextColor,
-                letterSpacing: '3px',
+                letterSpacing: '2px',
                 textTransform: 'uppercase',
                 transition: 'color 0.6s ease',
               }}
@@ -152,7 +152,7 @@ export default function Navigation() {
               style={{
                 fontFamily: 'Inter, system-ui, sans-serif',
                 fontSize: '11px',
-                fontWeight: 600,
+                fontWeight: 700,
                 color: baseTextColor,
                 letterSpacing: '1.3px',
                 textDecoration: 'none',
@@ -244,5 +244,7 @@ export default function Navigation() {
     </nav>
   );
 }
+
+
 
 

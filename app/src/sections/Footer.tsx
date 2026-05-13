@@ -61,9 +61,9 @@ export default function Footer() {
             src={navigationConfig.logoPath}
             alt={footerConfig.brandName}
             style={{
-              height: '80px',
+              height: '100px',
               width: 'auto',
-              maxWidth: '240px',
+              maxWidth: '300px',
               objectFit: 'contain',
               margin: '0 auto 12px',
               display: 'block',
@@ -180,4 +180,5 @@ export default function Footer() {
     </footer>
   );
 }
+
 
